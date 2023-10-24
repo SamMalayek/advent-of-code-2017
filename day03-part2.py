@@ -9,7 +9,7 @@ def main():
     centerRow, centerCol = maxLen//2, maxLen//2
     curRow, curCol = maxLen//2, maxLen//2
     curVal = 1
-    nextChangeDirRow, nextChangeDirCol = curRow, curCol+1
+    nextCornerRow, nextCornerCol = curRow, curCol+1
     dirs = [
         (0, 1),  # Right
         (-1, 0),  # Up
@@ -23,20 +23,22 @@ def main():
         (1, -1),  # Bot-Left
     ]
     curDir = 0
-    curSquareLenFromCenter = 1
+    lenFromCenter = 1
 
     while curVal < myInput:
         grid[curRow][curCol] = curVal
         curRow, curCol = curRow+dirs[curDir][0], curCol+dirs[curDir][1]
 
-        curVal = sum(grid[curRow][curCol-1:curCol+2]) + sum(grid[curRow-1][curCol-1:curCol+2]) + sum(grid[curRow+1][curCol-1:curCol+2])
-        if (curRow, curCol) == (nextChangeDirRow, nextChangeDirCol):
+        curVal = sum([sum(grid[curRow + i][curCol-1:curCol+2]) for i in range(-1, 2)])
+        if (curRow, curCol) == (nextCornerRow, nextCornerCol):
             curDir = (curDir+1) % 4
             if curDir == 0:
-                curSquareLenFromCenter += 1
-                nextChangeDirRow, nextChangeDirCol = centerRow+(dirCorners[curDir][0]*curSquareLenFromCenter)-1, centerCol+(dirCorners[curDir][1]*curSquareLenFromCenter)
+                lenFromCenter += 1
+                nextCornerRow = centerRow+(dirCorners[curDir][0]*lenFromCenter)-1
+                nextCornerCol = centerCol+(dirCorners[curDir][1]*lenFromCenter)
             else:
-                nextChangeDirRow, nextChangeDirCol = centerRow+(dirCorners[curDir][0]*curSquareLenFromCenter), centerCol+(dirCorners[curDir][1]*curSquareLenFromCenter)
+                nextCornerRow = centerRow+(dirCorners[curDir][0]*lenFromCenter)
+                nextCornerCol = centerCol+(dirCorners[curDir][1]*lenFromCenter)
 
     print(curVal)
 
