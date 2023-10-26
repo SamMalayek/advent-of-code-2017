@@ -3,7 +3,7 @@ import math
 def main():
     cur = tuple(map(int, open('day06.txt', 'r').read().rstrip().split()))
     lenCur = len(cur)
-    seen = {cur}
+    seen = set()
     count = 0
     goldenTuple = tuple()
 
