@@ -18,15 +18,10 @@ def main():
         if len(parts) > 2:
             head = parts[0]
             heads.add(head)
-            children = []
-            for part in parts[2:]:
-                children.append(part)
-            adjList[head].extend(children)
+            adjList[head].extend(parts[2:])
 
     for children in adjList.values():
-        for child in children:
-            if child in heads:
-                heads.remove(child)
+        heads = heads - set(children)
 
     root = next(iter(heads))
 
