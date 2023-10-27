@@ -14,7 +14,7 @@ def main():
         for curKey in register.keys():
             rest = rest.replace(f' {curKey} ', f' register["{curKey}"] ')
 
-        toExec = 'register["' + key + '"] ' + rest + ' else 0)'
+        toExec = f'register["{key}"] {rest} else 0)'
 
         exec(toExec, {}, {'register': register})
 
