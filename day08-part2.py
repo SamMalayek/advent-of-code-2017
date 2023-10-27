@@ -4,6 +4,7 @@ def main():
     register = {}
     values = []
 
+    # Required (rather than using defaultdict) to handle conditional statements that are exec'd
     for l in lines:
         key, _ = l.split(maxsplit=1)
         register[key] = 0
@@ -13,9 +14,9 @@ def main():
         for curKey in register.keys():
             rest = rest.replace(f' {curKey} ', f' register["{curKey}"] ')
 
-        toEval = 'register["' + key + '"] ' + rest + ' else 0)'
+        toExec = 'register["' + key + '"] ' + rest + ' else 0)'
 
-        exec(toEval, {}, {'register': register})
+        exec(toExec, {}, {'register': register})
 
         values.append(max(register.values()))
 
