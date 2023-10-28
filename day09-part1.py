@@ -12,15 +12,12 @@ def main():
         c = s[i]
         if exclamation == i:
             exclamation = -1
-            i += 1
-            continue
         elif c == '!':
             exclamation = i+1
         elif c == '>':
             inGarbage = False
-        elif inGarbage:
-            i += 1
-            continue
+        elif inGarbage:  # Need to stop short before other elif's
+            pass
         elif c == '{':
             curDepth += 1
         elif c == '}':
