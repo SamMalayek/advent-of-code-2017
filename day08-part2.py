@@ -7,7 +7,7 @@ def main():
     values = []
 
     for l in lines:
-        toExec = l.replace('inc ', '+= ').replace('dec ', '-= ') + ' else 0'
+        toExec = l.replace(' inc ', ' += ').replace(' dec ', ' -= ') + ' else 0'
 
         exec(toExec, {}, register)
 
