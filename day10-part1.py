@@ -15,7 +15,7 @@ def main():
         # Note that this reversing is circular.
         end = (i + length) % n
         if i < end:
-            sequence = sequence[:i] + sequence[i:i+length][::-1] + sequence[length+i:]
+            sequence = sequence[:i] + sequence[i:end][::-1] + sequence[end:]
         elif i == end:
             pass
         else:
