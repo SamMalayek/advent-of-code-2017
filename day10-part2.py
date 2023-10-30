@@ -1,5 +1,6 @@
 from functools import reduce
 
+
 def main():
     lengths = [ord(c) for c in open('day10.txt', 'r').read().rstrip()]
     lengths.extend([17, 31, 73, 47, 23])
@@ -19,9 +20,7 @@ def main():
             end = (i + length) % n
             if i < end:
                 sequence = sequence[:i] + sequence[i:end][::-1] + sequence[end:]
-            elif i == end:
-                pass
-            else:
+            elif i > end:
                 wrappedSublist = sequence[i:] + sequence[:end]
                 wrappedSublist.reverse()
                 sequence[:end], sequence[i:] = wrappedSublist[n-i:], wrappedSublist[:n-i]

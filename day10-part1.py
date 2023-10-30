@@ -16,9 +16,7 @@ def main():
         end = (i + length) % n
         if i < end:
             sequence = sequence[:i] + sequence[i:end][::-1] + sequence[end:]
-        elif i == end:
-            pass
-        else:
+        elif i > end:
             wrappedSublist = sequence[i:] + sequence[:end]
             wrappedSublist.reverse()
             sequence[:end], sequence[i:] = wrappedSublist[n-i:], wrappedSublist[:n-i]
