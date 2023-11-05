@@ -41,4 +41,5 @@ def main():
     print(knotHash)
 
 
-main()
+if __name__ == "__main__":
+    main()
