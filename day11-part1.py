@@ -20,7 +20,7 @@ def main():
     for d in dirs:
         x, y, z = getNeighbor(x, y, z, d)
 
-    print(max([abs(x), abs(y), abs(z)]))
+    print(max(abs(x), abs(y), abs(z)))
 
 
 if __name__ == "__main__":

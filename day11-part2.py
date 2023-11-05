@@ -16,7 +16,7 @@ def main():
         return x, y-1, z+1  # nw
 
     def getSteps(toX, toY, toZ):
-        return max([abs(toX), abs(toY), abs(toZ)])
+        return max(abs(toX), abs(toY), abs(toZ))
 
     x, y, z = 0, 0, 0
     furthestDist = 0
