@@ -11,7 +11,7 @@ def main():
         root, children = connection.split(' <-> ')
         adjList[root].extend(children.split(', '))
         total.add(root)
-        total = total.union(set(adjList[root]))
+        total = total | set(adjList[root])
 
     def dfs(node, seen):
         seen.add(node)
@@ -23,6 +23,7 @@ def main():
 
         if node == '0' or any(seenTarget):
             return True
+        return False
 
     numGroups = 0
     for root in adjList.keys():
