@@ -6,8 +6,7 @@ def main():
     stackLens = [0 for _ in range(maxStackNum)]
     stackPos = [0 for _ in range(maxStackNum)]
     stackDirUp = [True for _ in range(maxStackNum)]
-    for connection in connections:
-        stackNum, length = connection
+    for stackNum, length in connections:
         stackLens[stackNum] = length
 
     cur = -1
@@ -19,17 +18,17 @@ def main():
         if stackLens[cur] > 0 and stackPos[cur] == 0:
             caughtLocs.append((cur, stackLens[cur]))
 
-        for i in range(len(stackLens)):
-            if stackDirUp[i] and stackPos[i] < stackLens[i] - 1:
-                stackPos[i] = (stackPos[i] + 1) % stackLens[i] if stackLens[i] > 0 else 0
-            elif stackPos[i] == stackLens[i] - 1:
-                stackPos[i] = (stackPos[i] - 1) % stackLens[i] if stackLens[i] > 0 else 0
-                stackDirUp[i] = False
-            elif stackPos[i] == 0:
-                stackPos[i] = (stackPos[i] + 1) % stackLens[i] if stackLens[i] > 0 else 0
-                stackDirUp[i] = True
+        for stackNum, length in connections:
+            if stackDirUp[stackNum] and stackPos[stackNum] < length - 1:
+                stackPos[stackNum] = (stackPos[stackNum] + 1) % length
+            elif stackPos[stackNum] == length - 1:
+                stackPos[stackNum] = (stackPos[stackNum] - 1) % length
+                stackDirUp[stackNum] = False
+            elif stackPos[stackNum] == 0:
+                stackPos[stackNum] = (stackPos[stackNum] + 1) % length
+                stackDirUp[stackNum] = True
             else:
-                stackPos[i] = (stackPos[i] - 1) % stackLens[i] if stackLens[i] > 0 else 0
+                stackPos[stackNum] = (stackPos[stackNum] - 1) % length
 
     resp = 0
     for m1, m2 in caughtLocs:
