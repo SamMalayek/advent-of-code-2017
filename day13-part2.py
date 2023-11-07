@@ -7,15 +7,7 @@ def main():
     stackPos = [0 for _ in range(maxStackNum)]
     stackDirUp = [True for _ in range(maxStackNum)]
 
-    cur = -1
-    caughtLocs = []
-
-    while cur < maxStackNum - 1:
-        cur += 1  # According to problem, you begin outside the firewall, and step in as first operation
-
-        if cur in connections and stackPos[cur] == 0:
-            caughtLocs.append((cur, connections[cur]))
-
+    def iterate():
         for stackNum, length in connections.items():
             if stackDirUp[stackNum] and stackPos[stackNum] < length - 1:
                 stackPos[stackNum] = (stackPos[stackNum] + 1) % length
@@ -28,10 +20,35 @@ def main():
             else:
                 stackPos[stackNum] = (stackPos[stackNum] - 1) % length
 
-    resp = 0
-    for m1, m2 in caughtLocs:
-        resp += (m1*m2)
-    print(resp)
+    def flipDir():
+        for i in range(len(stackDirUp)):
+            stackDirUp[i] = not stackDirUp[i]
+
+    wait = 0
+    cur = -1
+
+    foundPath = False
+
+    while not foundPath:
+        while cur < maxStackNum-1:
+            cur += 1  # According to problem, you begin outside the firewall, and step in as first operation
+
+            if cur >= 0 and cur in connections and stackPos[cur] == 0:
+                wait += 1
+                flipDir()
+                while cur > 0:
+                    iterate()
+                    cur -= 1
+                flipDir()
+                cur = -2
+                break
+
+            iterate()
+
+        if cur == maxStackNum-1:
+            foundPath = True
+
+    print(wait)
 
 
 if __name__ == "__main__":
