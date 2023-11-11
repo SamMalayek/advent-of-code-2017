@@ -4,22 +4,14 @@ def main():
     count = 0
     divisor = 2147483647
 
-    def genA():
-        curA = int(lines[0].split()[-1])
+    def gen(multi, factor, cur):
         while True:
-            curA = (curA * 16807) % divisor
-            if curA % 4 == 0:
-                yield curA
+            cur = (cur * multi) % divisor
+            if cur % factor == 0:
+                yield cur
 
-    def genB():
-        curB = int(lines[1].split()[-1])
-        while True:
-            curB = (curB * 48271) % divisor
-            if curB % 8 == 0:
-                yield curB
-
-    yieldA = genA()
-    yieldB = genB()
+    yieldA = gen(16807, 4, int(lines[0].split()[-1]))
+    yieldB = gen(48271, 8, int(lines[1].split()[-1]))
     for _ in range(5000000):
         a = next(yieldA)
         b = next(yieldB)
