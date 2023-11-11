@@ -12,9 +12,7 @@ def main():
         curA = (curA * aMulti) % divisor
         curB = (curB * bMulti) % divisor
 
-        curABin = bin(curA)[2:].rjust(32, '0')[-16:]
-        curBBin = bin(curB)[2:].rjust(32, '0')[-16:]
-        if curABin == curBBin:
+        if bin(curA)[-16:] == bin(curB)[-16:]:
             count += 1
 
     print(count)
