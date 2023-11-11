@@ -30,7 +30,7 @@ def main():
 
     resp = 0
     for m1, m2 in caughtLocs:
-        resp += (m1*m2)
+        resp += (m1 * m2)
     print(resp)
 
 

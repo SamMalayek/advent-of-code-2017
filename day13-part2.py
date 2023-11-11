@@ -45,7 +45,7 @@ def main():
 
             iterate()
 
-        if cur == maxStackNum-1:
+        if cur == maxStackNum - 1:
             foundPath = True
 
     print(wait)
