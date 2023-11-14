@@ -4,7 +4,6 @@ def main():
     baseOrd = 97
     letters = [chr(o) for o in range(baseOrd, baseOrd+16)]
     seen = set()
-    maxSeenLen = 0
     iterations = 1000000000
 
     def swap(i, j):
@@ -24,13 +23,11 @@ def main():
                 i, j = list(map(letters.index, rest.split('/')))
                 swap(i, j)
 
-        seen.add(tuple(letters))
-        curSeenLen = len(seen)
-        if curSeenLen == maxSeenLen:
+        if tuple(letters) in seen:
             multi = (iterations - cur) // cur
             cur += (multi * cur)
+        seen.add(tuple(letters))
 
-        maxSeenLen = max(maxSeenLen, curSeenLen)
         cur += 1
 
     print(''.join(letters))
