@@ -13,7 +13,7 @@ def main():
 
         nextVal += 1
 
-    print(arr[cur+1])
+    print(arr[cur + 1 % len(arr)])
 
 
 if __name__ == "__main__":
