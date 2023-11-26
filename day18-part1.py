@@ -20,9 +20,8 @@ def main():
     cur = 0
 
     while cur < len(cmds):
-        cmd = cmds[cur]
-        op, rest = cmd.split(' ', 1)
-        rest = rest.split()
+        op, *rest = cmds[cur].split()
+
         if op == 'snd':
             num = getNum(rest[0])
             playedSounds.append(num)
@@ -41,8 +40,7 @@ def main():
                 register[rest[0]] %= num
         elif op == 'rcv':
             if len(playedSounds) != 0 and getNum(rest[0]) != 0:
-                val = playedSounds.pop()
-                recoveredSounds.append(val)
+                recoveredSounds.append(playedSounds.pop())
                 print(recoveredSounds[-1])
                 quit()
         elif op == 'jgz':
