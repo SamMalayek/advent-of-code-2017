@@ -2,18 +2,14 @@ from collections import deque
 
 
 def main():
-    grid = [a for a in open('day19.txt').read().splitlines() if a]
+    grid = open('day19.txt').read().splitlines()
 
     def baseShouldSkip(row, col):
-        if row < 0 or row >= len(grid):
-            return True
-        if col < 0 or col >= len(grid[row]):
-            return True
         if grid[row][col] == ' ':
             return True
         return False
 
-    dirs = [
+    dirs = [  # Supports Python <3.7 where order of dict keys is not guaranteed to equal insertion order
         (1, 0),   # Down
         (0, 1),   # Right
         (-1, 0),  # Up
