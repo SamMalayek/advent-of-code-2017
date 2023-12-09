@@ -27,10 +27,10 @@ def main():
     def isTimeoutOnChannel(channel, condition):
         with condition:
             while not channel:
-                notifiedBeforeTimeout = condition.wait(timeout=1/100)
-                if not notifiedBeforeTimeout:
-                    return True
-                return False
+                notifiedBeforeTimeout = condition.wait(timeout=0.01)
+                if notifiedBeforeTimeout:
+                    return False
+                return True
 
     def runProgram(receiveChannel, sendChannel, receiveCondition, sendCondition, register):
         cur = 0
@@ -63,9 +63,6 @@ def main():
                     return counter
 
                 register[rest[0]] = receiveChannel.pop()
-
-                if isTimeoutOnChannel(receiveChannel, receiveCondition):
-                    return counter
             elif op == 'jgz':
                 if getNum(rest[0], register) > 0:
                     cur += getNum(rest[1], register)
