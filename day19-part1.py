@@ -5,6 +5,10 @@ def main():
     grid = open('day19.txt').read().splitlines()
 
     def baseShouldSkip(row, col):
+        if row < 0 or row >= len(grid):  # Only needed for the example
+            return True
+        if col < 0 or col >= len(grid[row]):  # Only needed for the example
+            return True
         if grid[row][col] == ' ':
             return True
         return False
